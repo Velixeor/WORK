@@ -4,7 +4,7 @@
     {
 
         public List<Event> Events { get; } = new List<Event>();
-
+        string Name = "Test";
         // Конструктор класса
         public DAY(Event _Event)
         {
