@@ -1,0 +1,202 @@
+﻿@model DAY
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div id="popup" class="popup">
+  <div class="popup-content">
+    <!-- Контент всплывающего окна здесь -->
+    <button id="close-button">Закрыть</button>
+  </div>
+</div>
+*@
+<html>
+<head>
+
+    <!-- Подключение jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Подключение jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+    <script>
+  function showPopup(eventText) {
+    var popup = $('#popup');
+    popup.find('.popup-content').text(eventText);
+    popup.find('.popup-content').append('<div class="cl-btn-2"><div><div class="leftright"></div><div class="rightleft"></div><span class="close-btn">закрыть</span></div></div>');
+    popup.css('display','block');
+    popup.find('.cl-btn-2').click(function () {
+        popup.css('display', 'none');
+    });
+}
+
+</script>
+
+
+   
+    <style>
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 300px;
+            background-color: white;
+            border: 1px solid #337AB7;
+            padding: 20px;
+            color: #337AB7;
+        }
+
+        .popup-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cl-btn-2 {
+            margin: 20px;
+            display: flex;
+            justify-content: flex-end; /* изменяем горизонтальное выравнивание на правое */
+        }
+
+        .cl-btn-2 {
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0px;
+            left: 350px;
+        }
+
+            .cl-btn-2 div {
+                cursor: pointer;
+                position: relative;
+                height: 34px;
+                width: 25px;
+            }
+
+            .cl-btn-2 .leftright {
+                height: 2px;
+                width: 25px;
+                position: absolute;
+                margin-top: 12px;
+                background-color: #337AB7;
+                border-radius: 2px;
+                transform: rotate(45deg);
+                transition: all .3s ease-in;
+            }
+
+            .cl-btn-2 .rightleft {
+                height: 2px;
+                width: 25px;
+                position: absolute;
+                margin-top: 12px;
+                background-color: #337AB7;
+                border-radius: 2px;
+                transform: rotate(-45deg);
+                transition: all .3s ease-in;
+            }
+
+            .cl-btn-2 .close-btn {
+                margin: 27px 0 0 -2px;
+                position: absolute;
+                color: #337AB7;
+                font-family: Tahoma, sans-serif;
+                font-size: 6.5px;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: all .3s ease-in;
+                opacity: 0;
+            }
+
+            .cl-btn-2 div:hover .leftright {
+                transform: rotate(-45deg);
+                background-color: #000;
+            }
+
+            .cl-btn-2 div:hover .rightleft {
+                transform: rotate(45deg);
+                background-color: #000;
+            }
+
+            .cl-btn-2 div:hover .close-btn {
+                opacity: 1;
+            }
+
+
+
+
+
+
+        table {
+             border-collapse: collapse;
+             margin: 0 auto;
+            color: #337AB7;
+        }
+
+     
+        .event-cell {
+            border: 1px solid #337AB7;
+            padding: 10px;
+            text-align: left;
+            width: 140px;
+            height: 120px;
+        }
+
+            .event-cell:hover {
+                cursor: pointer;
+            }
+
+        h1 {
+            text-align: center;
+            color: #337AB7;
+        }
+    </style>
+</head>
+<body>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+        
+            <div class="cl-btn-2">
+                <div>
+                    <div class="leftright"></div>
+                    <div class="rightleft"></div>
+                    <span class="close-btn">закрыть</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Календарь событий на месяц</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th>Сб</th>
+                <th>Вс</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="event-cell" onclick="showPopup('@Model.Events[0].Name')"><br>@Model.Events[0].Name</td>
+                <td class="event-cell"></td>
+                <td class="event-cell"></td>
+                <td class="event-cell"></td>
+                <td class="event-cell"></td>
+                <td class="event-cell"></td>
+                <td class="event-cell"></td>
+            </tr>
+   
+        </tbody>
+    </table>
+</body>
+</html>
+
+
