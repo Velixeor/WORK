@@ -16,5 +16,6 @@ namespace WORK.Context
         public DbSet<DATA_event> Events { get; set; }
         //Add-Migration InitialMigration -c ApplicationDbContext -o Data/Migrations
         //Update-Database -context ApplicationDbContext
+        //pg_ctl start -D "C:\Program Files\PostgreSQL\15\data"
     }
 }

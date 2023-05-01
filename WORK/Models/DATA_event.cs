@@ -7,7 +7,7 @@ namespace WORK.Models
         [Key]
         public int id { get; set; }
         public string name { get; set; }
-        public string name1 { get; set; }
+        public virtual DATA_day DATA_day { get; set; }
         public string categori { get; set; }
     }
 }

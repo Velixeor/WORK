@@ -29,11 +29,16 @@ namespace WORK.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
+                    b.Property<int>("DATA_monthid")
+                        .HasColumnType("integer");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("id");
+
+                    b.HasIndex("DATA_monthid");
 
                     b.ToTable("Days");
                 });
@@ -46,6 +51,9 @@ namespace WORK.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
+                    b.Property<int>("DATA_dayid")
+                        .HasColumnType("integer");
+
                     b.Property<string>("categori")
                         .IsRequired()
                         .HasColumnType("text");
@@ -54,11 +62,9 @@ namespace WORK.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("name1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("id");
+
+                    b.HasIndex("DATA_dayid");
 
                     b.ToTable("Events");
                 });
@@ -78,6 +84,38 @@ namespace WORK.Data.Migrations
                     b.HasKey("id");
 
                     b.ToTable("months");
+                });
+
+            modelBuilder.Entity("WORK.Models.DATA_day", b =>
+                {
+                    b.HasOne("WORK.Models.DATA_month", "DATA_month")
+                        .WithMany("Days")
+                        .HasForeignKey("DATA_monthid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DATA_month");
+                });
+
+            modelBuilder.Entity("WORK.Models.DATA_event", b =>
+                {
+                    b.HasOne("WORK.Models.DATA_day", "DATA_day")
+                        .WithMany("Events")
+                        .HasForeignKey("DATA_dayid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DATA_day");
+                });
+
+            modelBuilder.Entity("WORK.Models.DATA_day", b =>
+                {
+                    b.Navigation("Events");
+                });
+
+            modelBuilder.Entity("WORK.Models.DATA_month", b =>
+                {
+                    b.Navigation("Days");
                 });
 #pragma warning restore 612, 618
         }
