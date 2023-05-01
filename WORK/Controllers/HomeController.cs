@@ -30,7 +30,18 @@ namespace WORK.Controllers
             DAY d = new DAY(e);
             return View(d);
         }
-       
+
+        [HttpPost]
+        public async Task<IActionResult> Input_Db(string input1, string input2)
+        {
+
+            Interaction_with_the_database Db = new Interaction_with_the_database(_dbContext);
+
+            await Db.InsertDbAsync();
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

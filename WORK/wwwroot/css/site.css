@@ -35,12 +35,26 @@ body {
     color: #337AB7;
 }
 
+.popup-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    border: 1px solid #337AB7;
+    padding: 20px;
+    color: #337AB7;
+}
 .popup-content {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 
 .cl-btn-2 {
     margin: 20px;
@@ -113,7 +127,79 @@ body {
     }
 
 
+.ico-btn {
+    position: absolute;
+    display: flex;
+    transform: translate(-70%, 10%);
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: all .20s cubic-bezier(0.4, 0.0, 0.2, 1);
+    /*   border: 2px solid; */
+}
 
+.ico-btnplus {
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: all .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    ;
+}
+
+    .ico-btnplus::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        transition: all .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+        transform: rotate(90deg);
+    }
+
+.ico-btn.is-active .ico-btn__plus {
+    transform: rotate(225deg);
+}
+
+.ico-btn {
+    position: absolute;
+    display: flex;
+    transform: translate(-70%, 10%);
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: all .20s cubic-bezier(0.4, 0.0, 0.2, 1);
+    /*   border: 2px solid; */
+}
+
+.ico-btn__plus {
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: all .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    ;
+}
+
+    .ico-btn__plus::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        transition: all .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+        transform: rotate(90deg);
+    }
+
+.ico-btn.is-active .ico-btn__plus {
+    transform: rotate(225deg);
+} 
 
 
 

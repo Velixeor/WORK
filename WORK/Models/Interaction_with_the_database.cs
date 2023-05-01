@@ -13,15 +13,16 @@ namespace WORK.Models
             _dbContext = dbContext;
         }
 
-        public async Task InsertUserAsync()
+        public async Task InsertDbAsync()
         {
-            
-            
-                 DATA_month m=new DATA_month();
+            DATA_month m = new DATA_month();
+            DATA_day d = new DATA_day();
+            DATA_event e= new DATA_event();
+
             m.name = "Test";
-            m.id = 2;
-          
             _dbContext.months.Add(m);
+            _dbContext.Days.Add(d);
+            _dbContext.Events.Add(e);
             await _dbContext.SaveChangesAsync();
         }
     }

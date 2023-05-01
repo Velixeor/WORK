@@ -15,16 +15,34 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
 
 
-  <script>
+ <script>
   function showPopup(eventText) {
     var popup = $('#popup');
     popup.find('.popup-content').text(eventText);
-    popup.find('.popup-content').append('<div class="cl-btn-2"><div><div class="leftright"></div><div class="rightleft"></div><span class="close-btn">закрыть</span></div></div>');
+    popup.find('.popup-content').append('<div class="cl-btn-2"> <div> <div class="leftright"></div> <div class="rightleft"></div> <span class="close-btn">закрыть</span></div> </div>');
+    popup.find('.popup-content').append('  <div class="ico-btn"> <span class="ico-btn__plus"></span> </div>');
     popup.css('display','block');
     popup.find('.cl-btn-2').click(function () {
         popup.css('display', 'none');
     });
+    popup.find('.ico-btn').click(function () {
+      $(this).toggleClass('is-active');
+     popup.css('display', 'none');
+      showForm();
+    });
     }
+        function showForm() {
+            var formPopup = $('<div class="popup-form">');
+            formPopup.append('<div class="cl-btn-2"> <div> <div class="leftright"></div> <div class="rightleft"></div> <span class="close-btn">закрыть</span></div> </div>');
+            formPopup.append('<form id="myForm" method="post" action="/Home/Input_Db"><label for="input1">Input 1:</label><input type="text" name="input1" id="input1"><label for="input2">Input 2:</label><input type="text" name="input2" id="input2"><button type="submit">Submit</button></form>');
+            $('body').append(formPopup);
+            formPopup.css('display', 'block');
+            formPopup.find('.cl-btn-2').click(function () {
+                formPopup.remove();
+            });
+        }
+
+
 </script>
 
 
@@ -32,6 +50,7 @@
 <link href="site.css" rel="stylesheet" />
 </head>
 <body>
+   
     <div id="popup" class="popup">
         <div class="popup-content">
         
@@ -42,6 +61,12 @@
                     <span class="close-btn">закрыть</span>
                 </div>
             </div>
+
+            <div class="ico-btn">
+                <span class="ico-btn__plus"></span>
+            </div>
+
+
         </div>
     </div>
 
