@@ -28,16 +28,23 @@ namespace WORK.Controllers
             //await test.InsertUserAsync();
             Event e = new Event("Гулять", "Отдых");
             DAY d = new DAY(e);
-            return View(d);
+            List<DAY> T=new List<DAY>();
+            T.Add(d);
+            for(int i = 0; i < 29; i++)
+            {
+                DAY t = new DAY();
+                T.Add(t);
+            }
+            return View(T);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Input_Db(string input1, string input2)
+        public async Task<IActionResult> Input_Db(string nameDay, string nameMonth, string categori, string nameEvent, int DayNumber)
         {
 
             Interaction_with_the_database Db = new Interaction_with_the_database(_dbContext);
 
-            await Db.InsertDbAsync();
+            await Db.InsertDbAsync(nameDay,  nameMonth,  categori, nameEvent, DayNumber);
 
             return View();
         }

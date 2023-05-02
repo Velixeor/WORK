@@ -11,7 +11,7 @@ using WORK.Context;
 namespace WORK.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230501123625_InitialMigration")]
+    [Migration("20230501225150_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -33,6 +33,9 @@ namespace WORK.Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
                     b.Property<int>("DATA_monthid")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NumberDay")
                         .HasColumnType("integer");
 
                     b.Property<string>("name")

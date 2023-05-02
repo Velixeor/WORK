@@ -31,6 +31,7 @@ namespace WORK.Data.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "text", nullable: false),
+                    NumberDay = table.Column<int>(type: "integer", nullable: false),
                     DATA_monthid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

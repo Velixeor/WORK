@@ -32,6 +32,9 @@ namespace WORK.Data.Migrations
                     b.Property<int>("DATA_monthid")
                         .HasColumnType("integer");
 
+                    b.Property<int>("NumberDay")
+                        .HasColumnType("integer");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");

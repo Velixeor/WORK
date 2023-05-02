@@ -1,4 +1,4 @@
-﻿@model DAY
+﻿@model List<DAY>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -18,7 +18,13 @@
  <script>
   function showPopup(eventText) {
     var popup = $('#popup');
-    popup.find('.popup-content').text(eventText);
+    popup.find('.popup-content').empty();
+    // Разбиваем текст на строки по символу переноса строки
+    var lines = eventText.split('\n');
+    // Итерируемся по каждой строке и добавляем ее в popup-content
+    for (var i = 0; i < lines.length; i++) {
+        popup.find('.popup-content').append('<div class="popup-line">' + lines[i] + '</div>');
+    }
     popup.find('.popup-content').append('<div class="cl-btn-2"> <div> <div class="leftright"></div> <div class="rightleft"></div> <span class="close-btn">закрыть</span></div> </div>');
     popup.find('.popup-content').append('  <div class="ico-btn"> <span class="ico-btn__plus"></span> </div>');
     popup.css('display','block');
@@ -27,14 +33,14 @@
     });
     popup.find('.ico-btn').click(function () {
       $(this).toggleClass('is-active');
-     popup.css('display', 'none');
+     //popup.css('display', 'none');
       showForm();
     });
-    }
+  }
         function showForm() {
             var formPopup = $('<div class="popup-form">');
             formPopup.append('<div class="cl-btn-2"> <div> <div class="leftright"></div> <div class="rightleft"></div> <span class="close-btn">закрыть</span></div> </div>');
-            formPopup.append('<form id="myForm" method="post" action="/Home/Input_Db"><label for="input1">Input 1:</label><input type="text" name="input1" id="input1"><label for="input2">Input 2:</label><input type="text" name="input2" id="input2"><button type="submit">Submit</button></form>');
+            formPopup.append('<form id="myForm" method="post" action="/Home/Input_Db"><input type="hidden" name="constValue" value="Май"> <input type="hidden" name="constValue" value="Май"> <label for="input1">Input 1:</label> <input type="text" name="input1" id="input1"> <label for="input2">Input 2:</label> <input type="text" name="input2" id="input2"> <button type="submit">Submit</button></form>');
             $('body').append(formPopup);
             formPopup.css('display', 'block');
             formPopup.find('.cl-btn-2').click(function () {
@@ -72,6 +78,8 @@
 
     <h1>Календарь событий на месяц</h1>
     <table>
+
+       
         <thead>
             <tr>
                 <th>Пн</th>
@@ -84,15 +92,29 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="event-cell" onclick="showPopup('@Model.Events[0].Name')"><br>@Model.Events[0].Name</td>
-                <td class="event-cell"></td>
-                <td class="event-cell"></td>
-                <td class="event-cell"></td>
-                <td class="event-cell"></td>
-                <td class="event-cell"></td>
-                <td class="event-cell"></td>
-            </tr>
+            @{
+                var counter = 0;
+                string s ="";
+                string s1 = "";
+            }
+           @for (int i = 0; i < 4; i++)
+           {
+                <tr>
+                    @for (int j = 0; j < 7; j++)
+                    {   
+                        s ="";
+                        @for (int k = 0; k < Model[i*7+j].Events.Count; k++)
+                        {
+                            s += Model[i * 7 + j].Events[k].Name+"/n";
+                        }
+                        s1 = s;
+
+                        <td class="event-cell" onclick="showPopup('@s.Replace("/n", "<br>")')">@Html.Raw( @s.Replace("/n", "<br>"))</td>
+                    }
+
+                </tr>
+           }
+           
    
         </tbody>
     </table>
